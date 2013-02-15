@@ -18,15 +18,15 @@ img {
 	border : 0px;
 }
 
-a:link    { 
+a:link		{ 
 	color: #000099;
 }
 
-a:hover   { 
+a:hover	 { 
 	color: #ff0000;
 }
 
-a:active  { 
+a:active	{ 
 	color: #ff0000;
 }
 
@@ -43,15 +43,15 @@ a:visited {
 	color: gray; 
 }
 
-.signature a:link    { 
+.signature a:link		{ 
 	color: #9999ff; 
 }
 
-.signature a:hover   { 
+.signature a:hover	 { 
 	color: #ff9999; 
 }
 
-.signature a:active  { 
+.signature a:active	{ 
 	color: #ff9999; 
 }
 
@@ -65,11 +65,11 @@ a:visited {
 	text-align: center; 
 }
 
-.even { 
+tr.even td { 
 	background: #eeeeee; 
 }
 
-.odd  { 
+tr.odd td	{ 
 	background: #dddddd; 
 }
 
@@ -102,19 +102,23 @@ a.top {
 }
 
 tr.header {
-    background: #9999cc;
+	background: #9999cc;
 }
 
 tr.subheader {
-    background: #666699;
-    height : 2px;
+	background: #666699;
+	height : 2px;
 }
 
 .small {
-    font-size: 75%;
-    text-align: right;
+	font-size: 75%;
+	text-align: right;
 }
 
 .nav {
 	width: 20%;
+}
+div.message-body {
+  font-family: monospace;
+  margine: 1em 0px;
 }

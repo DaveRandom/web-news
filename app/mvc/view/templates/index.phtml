@@ -1,0 +1,43 @@
+		<table border="0" cellpadding="6"	cellspacing="0">
+			<tr>
+				<td>
+					<table class="grouplist">
+						<tr	class="grouplisthead">
+							<td>name</td>
+							<td>messages</td>
+							<td>rss</td>
+							<td>rdf</td>
+							<td>atom</td>
+						</tr>
+<?php
+
+	$class = 'odd';
+
+	while ($item = $this->list->getItem()):
+
+    $groupName = $this->stringFormatter->escapeHTMLOutput($item->groupName);
+    $groupNameUrl = $this->stringFormatter->escapeHTMLOutput(urlencode($item->groupName));
+    $messageCount = $item->messageCount;
+    $active = $item->active;
+
+		$class = $class === 'even' ? 'odd' : 'even';
+
+?>
+						<tr class="<?php echo $class ?>">
+							<td><a class="active<?php echo $active ? 'n' : '' ?>" href="/<?php echo $groupNameUrl ?>"><?php echo $groupName ?></a></td>
+							<td align="right"><?php echo $messageCount ?></td>
+							<td><?php if ($active) { echo '<a href="/'.$groupNameUrl.'?format=rss">rss</a>'; } ?></td>
+							<td><?php if ($active) { echo '<a href="/'.$groupNameUrl.'?format=rdf">rdf</a>'; } ?></td>
+							<td><?php if ($active) { echo '<a href="/'.$groupNameUrl.'?format=atom">atom</a>'; } ?></td>
+						</tr>
+<?php endwhile; ?>
+					</table>
+				</td>
+				<td valign="top">
+					<h1>Welcome!</h1>
+					<p>This is a completely experimental interface to the PHP mailing lists as reflected on the <a href="news://<?php echo $newsHost ?>/"><?php echo $newsHost ?> NNTP server</a>.</p>
+					<p>There may be a little more info in the <a href="README">README</a> file.</p>
+      		<p>The news server software that is used is <a href="http://trainedmonkey.com/colobus/">colobus</a>.</p>
+				</td>
+			</tr>
+		</table>

@@ -1,0 +1,26 @@
+RewriteEngine On
+
+# Allow everything that exists in the public directry to fall straight through
+RewriteCond %{DOCUMENT_ROOT}/public%{REQUEST_URI} -f
+RewriteRule .*                                public/$0                                          [QSA]
+
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule .*                                -                                                  [L]
+
+# Group page
+RewriteRule ^(php[^/]+)$                      index.php?page=group&group=$1                      [L,QSA]
+RewriteRule ^(php[^/]+)/s/([0-9]+)$           index.php?page=group&group=$1&i=$2                 [L,QSA]
+RewriteRule ^(php[^/]+)/start/([0-9]+)$       index.php?page=group&group=$1&i=$2                 [L,QSA] #BC
+RewriteRule ^group\.php$                      index.php?page=group                               [L,QSA] #BC
+
+# Article page
+RewriteRule ^(php[^/]+)/a/([0-9]+)$           index.php?page=article&group=$1&article=$2&part=0  [L]
+RewriteRule ^(php[^/]+)/([0-9]+)$             index.php?page=article&group=$1&article=$2&part=0  [L]     #BC
+RewriteRule ^article\.php$                    index.php?page=article                             [L,QSA] #BC
+
+# Download attachments
+RewriteRule ^(php[^/]+)/f/([0-9]+)/([0-9]+)?$ index.php?page=attach&group=$1&article=$2&part=$3  [L]
+RewriteRule ^getpart\.php$                    index.php?page=attach                              [L,QSA] #BC
+
+# Route everything else to index
+RewriteRule .*                                index.php?page=index                               [L]

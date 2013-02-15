@@ -1,0 +1,60 @@
+		<table border="0" cellpadding="2" cellspacing="2" width="100%">
+			<tr class="alisthead">
+				<td class="nav"><?php echo $isFirstPage ? '&nbsp;' : '<a href="/'.$groupName.'/s/'.$previous.'"><b>&laquo; previous</b></a>' ?></td>
+				<td class="alisthead"><?php echo $groupName ?> (<?php echo $start ?> - <?php echo $end ?> of <?php echo $total ?>)</td>
+				<td class="nav"><?php echo $isLastPage ? '&nbsp;' : '<a href="/'.$groupName.'/s/'.$next.'"><b>next &raquo;</b></a>' ?></td>
+			</tr>
+		</table>
+		<table class="alist" width="100%">
+			<thead>
+				<tr class="alisthead">
+					<th>#</th>
+					<th>subject</th>
+					<th>author</th>
+					<th>date</th>
+					<th>lines</th>
+				</tr>
+			</thead>
+			<tbody>
+<?php
+
+	$class = 'odd';
+
+	while ($item = $this->overview->getItem()):
+
+		$id = $item->id;
+		$subject = $this->stringFormatter->escapeHTMLOutput($this->stringFormatter->formatEmailSubject($item->subject, 100, 1));
+		$timestamp = $this->stringFormatter->escapeHTMLOutput($this->stringFormatter->formatLocalTimestamp($item->timestamp));
+		$lines = $item->lines;
+
+		list($authorName, $authorEmail) = $this->stringFormatter->formatEmailAuthor($item->author);
+		if ($authorEmail) {
+			$author = '<a href="mailto:'
+							. $this->stringFormatter->escapeHTMLOutput(urlencode($authorEmail))
+							. '" class="email fn n">'
+							. $this->stringFormatter->escapeHTMLOutput($authorName)
+							. '</a>';
+		} else {
+			$author = $this->stringFormatter->escapeHTMLOutput($authorName);
+		}
+
+		$class = $class === 'even' ? 'odd' : 'even';
+
+?>
+				<tr class="<?php echo $class ?>">
+					<td><a href="/<?php echo $groupName ?>/a/<?php echo $id ?>"><?php echo $id ?></a></td>
+					<td><a href="/<?php echo $groupName ?>/a/<?php echo $id ?>"><?php echo $subject ?></a></td>
+					<td class=" vcard"><?php echo $author ?></td>
+					<td align="center"><tt><?php echo $timestamp ?></tt></td>
+					<td align="right"><?php echo $lines ?></td>
+				</tr>
+<?php endwhile; ?>
+			</tbody>
+		</table>
+		<table border="0" cellpadding="2" cellspacing="2" width="100%">
+			<tr class="alisthead">
+				<td class="nav"><?php echo $isFirstPage ? '&nbsp;' : '<a href="/'.$groupName.'/s/'.$previous.'"><b>&laquo; previous</b></a>' ?></td>
+				<td align="center" class="alisthead"><?php echo $groupName ?> (<?php echo $start ?> - <?php echo $end ?> of <?php echo $total ?>)</td>
+				<td class="nav"><?php echo $isLastPage ? '&nbsp;' : '<a href="/'.$groupName.'/s/'.$next.'"><b>next &raquo;</b></a>' ?></td>
+			</tr>
+		</table>

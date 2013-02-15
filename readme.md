@@ -1,3 +1,13 @@
+A complete rewrite of the original web front end for the mailing list server.
+
+Still very much a work in progress, much refactoring/de-horriblifying to be done.
+
+A live instance of this code is available at http://php-news.herokuapp.com
+
+Original readme below.
+
+---
+
 this is all very ugly. just proof-of-concept, really.
 
 the biggest thing to do would be to do something smart with

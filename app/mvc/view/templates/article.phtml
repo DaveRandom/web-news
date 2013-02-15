@@ -1,0 +1,48 @@
+		<blockquote>
+			<table border="0" cellpadding="2" cellspacing="2" width="100%">
+				<tr class="vcard">
+					<td class="headerlabel">From:</td>
+					<td class="headervalue"><?php echo $author ?></td>
+					<td class="headerlabel">Date:</td>
+					<td class="headervalue"><?php echo $date ?></td>
+				</tr>
+				<tr>
+					<td class="headerlabel">Subject:</td>
+					<td class="headervalue" colspan="3"><?php echo $subject ?></td>
+				</tr>
+				<tr>
+					<td class="headerlabel">References:</td>
+					<td class="headervalue">
+<?php foreach ($refs as $label => $link) { ?>
+						<a href="<?php echo $link ?>"><?php echo $label ?></a>
+<?php } ?>
+					</td>
+					<td class="headerlabel">Groups:</td>
+					<td class="headervalue">
+<?php foreach ($groups as $label => $link) { ?>
+						<a href="<?php echo $link ?>"><?php echo $label ?></a>
+<?php } ?>
+					</td>
+				</tr>
+<?php if ($attachments) { ?>
+				<tr>
+					<td class="headerlabel">Attachments:</td>
+					<td class="headervalue" colspan="3">
+<?php foreach ($attachments as $partId => $name) { ?>
+						<a href="/<?php echo $groupName ?>/f/<?php echo $articleId ?>/<?php echo $partId ?>"><?php echo $name ?></a>
+<?php } ?>
+					</td>
+				</tr>
+<?php } ?>
+			</table>
+		</blockquote>
+		<blockquote>
+			<div class="message-body"><?php echo $body ?></div>
+		</blockquote>
+		<table border="0" cellpadding="2" cellspacing="2" width="100%">
+			<tr class="alisthead">
+				<td class="nav"><?php echo $articleId > 1 ? '<a href="/'.$groupName.'/a/'.($articleId - 1).'"><b>&laquo; previous</b></a>' : '&nbsp;' ?></td>
+				<td align="center" class="alisthead"><?php echo $groupName ?> (#<?php echo $articleId ?>)</td>
+				<td align="right" class="nav"><a href="/<?php echo $groupName ?>/a/<?php echo $articleId + 1 ?>"><b>next &raquo;</b></a></td>
+			</tr>
+		</table>
