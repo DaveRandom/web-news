@@ -21,10 +21,8 @@
 
     public function handleRequest() {
       if ($this->request->getServerVar('REQUEST_URI') !== '/') {
-        var_dump($this->request);
-        exit;
-  //      header($this->request->getServerVar('SERVER_PROTOCOL').' 301 Moved Permanently');
-  //      header('Location: http://'.$this->request->getServerVar('HTTP_HOST').'/');
+        header($this->request->getServerVar('SERVER_PROTOCOL').' 301 Moved Permanently');
+        header('Location: http://'.$this->request->getServerVar('HTTP_HOST').'/');
       }
 
       $this->list->requestListData();
