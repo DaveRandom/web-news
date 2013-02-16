@@ -61,8 +61,8 @@
 
     private function createChannelHeader() {
       $elements = array(
-        'id' => 'http://'.$this->request->getServerVar('HTTP_HOST').'/'.$this->request->getUrlParam('group'),
-        'title' => $this->request->getAppVar('newsHost').': '.$this->request->getUrlParam('group'),
+        'id' => 'http://'.$this->request->getServerVar('HTTP_HOST').'/'.$this->request->getUrlVar('group'),
+        'title' => $this->request->getAppVar('newsHost').': '.$this->request->getUrlVar('group'),
         'updated' => date('c') // TODO: Make this reflect the time of the last message
       );
 
@@ -74,7 +74,7 @@
 
       $this->root->appendChild($this->doc->createElement('author'))
         ->appendChild($this->doc->createElement('name'))
-          ->appendChild($this->doc->createTextNode($this->request->getUrlParam('group')));
+          ->appendChild($this->doc->createTextNode($this->request->getUrlVar('group')));
     }
 
     /**
@@ -85,7 +85,7 @@
 
 	    list($authorName, $authorEmail) = $this->stringFormatter->formatEmailAuthor($item->author, '');
       $elements = array(
-        'id' => 'http://'.$this->request->getServerParam('HTTP_HOST').'/'.$this->request->getUrlParam('group').'/a/'.$item->id,
+        'id' => 'http://'.$this->request->getServerVar('HTTP_HOST').'/'.$this->request->getUrlVar('group').'/a/'.$item->id,
         'title' => $this->stringFormatter->formatEmailSubject($item->subject, ''),
         'updated' => date('c', $item->timestamp)
       );
